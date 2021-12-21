@@ -1,4 +1,4 @@
 # python
-molchanov huesos
-soglasen
+DDZ
+
 
