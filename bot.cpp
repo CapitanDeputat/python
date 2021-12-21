@@ -87,7 +87,76 @@ bool normalMode(Snake* bot, Snake enemy, Apple apple)
 //âîçâðàùàåò ëîæü åñëè áîò ñòîëêíóëñÿ ñ ñîáîé
 bool goToApple(Snake* bot, Snake enemy, Apple apple)
 {
+	int botX = bot->getSnakeX();
+	int botY = bot->getSnakeY();
+	int appX = apple.getAppleÑoordX();
+	int appY = apple.getAppleÑoordY();
+	Snake::MoveDirection botDir = bot->getSnakeDirection();
+	if (botY != appY) {
+		if ((botY < appY) && (bot->getSnakeDirection() != Snake::DOWN)) {
+			switch (botDir)
+			{
 
+			case Snake::UP:
+				bot->setSnakeDirection(Snake::LEFT);
+				break;
+			case Snake::LEFT:
+				bot->setSnakeDirection(Snake::DOWN);
+				break;
+			case Snake::RIGHT:
+				bot->setSnakeDirection(Snake::DOWN);
+				break;
+			}
+		}
+		if ((botY > appY) && (bot->getSnakeDirection() != Snake::UP)) {
+			switch (botDir)
+			{
+
+			case Snake::DOWN:
+				bot->setSnakeDirection(Snake::LEFT);
+				break;
+			case Snake::LEFT:
+				bot->setSnakeDirection(Snake::UP);
+				break;
+			case Snake::RIGHT:
+				bot->setSnakeDirection(Snake::UP);
+				break;
+			}
+		}
+	}
+	else {
+		if ((botX < appX) && (bot->getSnakeDirection() != Snake::RIGHT)) {
+			switch (botDir)
+			{
+
+			case Snake::DOWN:
+				bot->setSnakeDirection(Snake::RIGHT);
+				break;
+			case Snake::LEFT:
+				bot->setSnakeDirection(Snake::UP);
+				break;
+			case Snake::UP:
+				bot->setSnakeDirection(Snake::RIGHT);
+				break;
+			}
+		}
+		if ((botX > appX) && (bot->getSnakeDirection() != Snake::LEFT)) {
+			switch (botDir)
+			{
+
+			case Snake::DOWN:
+				bot->setSnakeDirection(Snake::LEFT);
+				break;
+			case Snake::RIGHT:
+				bot->setSnakeDirection(Snake::UP);
+				break;
+			case Snake::UP:
+				bot->setSnakeDirection(Snake::LEFT);
+				break;
+			}
+		}
+	}
+	bool res = bot->moveSnake();
 	return res;
 }
 
