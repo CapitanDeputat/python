@@ -19,7 +19,62 @@ bool hardMode(Snake* bot, Snake enemy, Apple apple)
 //‚ÓÁ‚‡˘‡ÂÚ ÎÓÊ¸ ÂÒÎË ·ÓÚ ÒÚÓÎÍÌÛÎÒˇ Ò ÒÓ·ÓÈ
 bool normalMode(Snake* bot, Snake enemy, Apple apple)
 {
+	int botX = bot->getSnakeX();
+	int botY = bot->getSnakeY();
+	int appX = apple.getApple—oordX();
+	int appY = apple.getApple—oordY();
+	std::vector <int> botCoordsX;
+	std::vector <int> botCoordsY;
+	int botHeadX = bot->getSnakeX();
+	int botHeadY = bot->getSnakeY();
+	int counter = 0;
+	for (std::vector<Line>::iterator i = bot->snakeBody.begin(); i != bot->snakeBody.end(); i++) {
+		int x = i->getNowX();
+		int y = i->getNowY();
+		botCoordsX.push_back(x);
+		botCoordsY.push_back(y);
+		counter++;
+	}
+	int botBackX = botCoordsX[counter - 1];
+	int botBackY = botCoordsY[counter - 1];
+	for (int i = 0; i < counter - 1; i++) {
+		if (botCoordsX[i] > botBackX) {
+			botBackX = botCoordsX[i];
+		}
+		if (botCoordsY[i] > botBackY) {
+			botBackY = botCoordsY[i];
+		}
+	}
+	if (botHeadX < botBackX) {
+		int remp = botBackX;
+		botBackX = botHeadX;
+		botHeadX = remp;
+	}
+	if (botHeadY < botBackY) {
+		int remp2 = botBackY;
+		botBackY = botHeadY;
+		botHeadY = remp2;
+	}
+	Snake::MoveDirection botDir = bot->getSnakeDirection();
+	if ((botY <= botHeadY) && (botY >= botBackY)) {
+		if (((botX == (botHeadX + 1)) || (botX == (botBackX + 1))) && (bot->getSnakeDirection() == Snake::LEFT))
+			bot->setSnakeDirection(Snake::DOWN);
+		if (((botX == (botHeadX - 1)) || (botX == (botBackX - 1))) && (bot->getSnakeDirection() == Snake::RIGHT))
+			bot->setSnakeDirection(Snake::DOWN);
+	}
+	else {
+		if (botX <= botHeadX && botX >= botBackX) {
+			if (((botY == (botHeadY - 1)) || (botY == (botBackY - 1))) && (bot->getSnakeDirection() == Snake::DOWN))
+				bot->setSnakeDirection(Snake::LEFT);
+			if (((botX == (botHeadX + 1)) || (botX == (botBackX + 1))) && (bot->getSnakeDirection() == Snake::UP))
+				bot->setSnakeDirection(Snake::LEFT);
+		}
+	}
 
+	if (botDir == bot->getSnakeDirection()) {
+		return goToApple(bot, enemy, apple);
+	}
+	return true;
 }
 
 
