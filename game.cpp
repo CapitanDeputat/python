@@ -120,6 +120,7 @@ void Game::drawMenu()
 	updateGame();
 }
 
+
 //Функция для отрисовки всех полей выбора бота в одиночной игре
 void Game::drawSingleMenu()
 {
