@@ -1,3 +1,4 @@
+#include "bot.h"
 //функция выбирает сложное движение боту(уклонение от игрока и яблока)
 /*
 	bot - ссылка на бота
@@ -7,7 +8,86 @@
 //возвращает ложь если бот столкнулся с собой
 bool hardMode(Snake* bot, Snake enemy, Apple apple)
 {
-	
+	int botX = bot->getSnakeX();
+	int botY = bot->getSnakeY();
+	int appX = apple.getAppleСoordX();
+	int appY = apple.getAppleСoordY();
+	std::vector <int> enemyCoordsX;
+	std::vector <int> enemyCoordsY;
+	int playerHeadX = enemy.getSnakeX();
+	int playerHeadY = enemy.getSnakeY();
+	int counter = 0;
+	for (std::vector<Line>::iterator i = enemy.snakeBody.begin(); i != enemy.snakeBody.end(); i++) {
+		int x = i->getNowX();
+		int y = i->getNowY();
+		enemyCoordsX.push_back(x);
+		enemyCoordsY.push_back(y);
+		counter++;
+	}
+	int playerBackX = enemyCoordsX[counter - 1];
+	int playerBackY = enemyCoordsY[counter - 1];
+	int playerBackMinX = enemyCoordsX[counter - 1];
+	int playerBackMinY = enemyCoordsY[counter - 1];
+	for (int i = 0; i < counter - 1; i++) {
+		if (enemyCoordsX[i] > playerBackX) {
+			playerBackX = enemyCoordsX[i];
+		}
+		if (enemyCoordsY[i] > playerBackY) {
+			playerBackY = enemyCoordsY[i];
+		}
+		if (enemyCoordsX[i] < playerBackMinX) {
+			playerBackMinX = enemyCoordsX[i];
+		}
+		if (enemyCoordsY[i] < playerBackMinY) {
+			playerBackMinY = enemyCoordsY[i];
+		}
+	}
+	if (playerHeadX < playerBackX) {
+		int remp = playerBackX;
+		playerBackX = playerHeadX;
+		playerHeadX = remp;
+	}
+	if (playerHeadY < playerBackY) {
+		int remp2 = playerBackY;
+		playerBackY = playerHeadY;
+		playerHeadY = remp2;
+	}
+	if (playerBackMinX < playerBackX) {
+		playerBackX = playerBackMinX;
+	}
+	if (playerBackMinY < playerBackY) {
+		playerBackY = playerBackMinY;
+	}
+	Snake::MoveDirection botDir = bot->getSnakeDirection();
+	if ((botY <= playerHeadY) && (botY >= playerBackY)) {
+		if (((botX == (playerHeadX - 1)) || (botX == (playerBackX - 1))) && (bot->getSnakeDirection() == Snake::RIGHT))
+			bot->setSnakeDirection(Snake::DOWN);
+		if (((botX == (playerHeadX + 1)) || (botX == (playerBackX + 1))) && (bot->getSnakeDirection() == Snake::LEFT))
+			bot->setSnakeDirection(Snake::DOWN);
+	}
+	else {
+		if (botX <= playerHeadX && botX >= playerBackX) {
+			if (((botY == (playerHeadY - 1)) || (botY == (playerBackY - 1))) && (bot->getSnakeDirection() == Snake::DOWN))
+				bot->setSnakeDirection(Snake::LEFT);
+			if (((botY == (playerHeadY + 1)) || (botY == (playerBackY + 1))) && (bot->getSnakeDirection() == Snake::UP))
+				bot->setSnakeDirection(Snake::LEFT);
+		}
+	}
+
+	if ((botX == appX) && (botY == (appY + 1)) && (bot->getSnakeDirection() == Snake::UP)) {
+		bot->setSnakeDirection(Snake::RIGHT);
+	}
+	if ((botX == appX) && (botY == (appY - 1)) && (bot->getSnakeDirection() == Snake::DOWN)) {
+		bot->setSnakeDirection(Snake::RIGHT);
+	}
+	if ((botY == appY) && (botX == (appX - 1)) && (bot->getSnakeDirection() == Snake::RIGHT)) {
+		bot->setSnakeDirection(Snake::UP);
+	}
+	if ((botY == appY) && (botX == (appX + 1)) && (bot->getSnakeDirection() == Snake::LEFT)) {
+		bot->setSnakeDirection(Snake::UP);
+	}
+
+	bool res = bot->moveSnake();
 	return res;
 }
 //функция выбирает простое движение боту(стремление к яблоку, попытка не задеть хвост)
