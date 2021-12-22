@@ -15,3 +15,13 @@ Apple::Apple(int width, int height, int size)
 }
 
 
+//Функция генерирует новое яблоко
+void Apple::newApple()
+{
+	appleСoordX = rand() % (windowWidth / appleSize - 2) + 1;
+	appleСoordY = rand() % (windowHeight / appleSize - 2) + 1;
+
+	appleShape.setPosition(appleСoordX * appleSize, appleСoordY * appleSize);
+}
+
+
