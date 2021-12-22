@@ -25,3 +25,19 @@ void Apple::newApple()
 }
 
 
+//Функции возвращающие координаты яблока 
+int Apple::getAppleСoordX()
+{
+	return appleСoordX;
+}
+
+int Apple::getAppleСoordY()
+{
+	return appleСoordY;
+}
+
+//Функция отрисовывает яблоко в окне, которое передано в качестве параметра
+void Apple::drawApple(sf::RenderWindow& window)
+{
+	window.draw(appleShape);
+}
