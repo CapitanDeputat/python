@@ -56,4 +56,21 @@ Wall::Wall(int size, int width, int height)
 	wall.setSize(sf::Vector2f(size, size));
 	wall.setFillColor(sf::Color::Cyan);
 }
+//‘ункци€, провер€юща€ столкновение точки со стеной
+bool Wall::isWall(int x, int y)
+{
+	for (int i = 0; i < partsOfWall.size(); i++)
+		if (partsOfWall[i].x / wallSize == x && partsOfWall[i].y / wallSize == y)
+			return true;
 
+	return false;
+}
+//‘ункци€ отрисовки стены
+void Wall::drawWall(sf::RenderWindow& window)
+{
+	for (int i = 0; i < partsOfWall.size(); i++)
+	{
+		wall.setPosition(partsOfWall[i]);
+		window.draw(wall);
+	}
+}
