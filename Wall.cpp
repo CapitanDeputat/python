@@ -1,6 +1,6 @@
 #include "Wall.h"
 
-//конструктор с параметрами стены(ширина экрана, высота экрана, размер стены)
+//Реализовал конструктор с параметрами стены(ширина экрана, высота экрана, размер стены)
 Wall::Wall(int size, int width, int height)
 {
 	wallSize = size;
@@ -65,7 +65,7 @@ bool Wall::isWall(int x, int y)
 
 	return false;
 }
-//Функция отрисовки стены
+//Функция, отвечающая за отрисовку стены
 void Wall::drawWall(sf::RenderWindow& window)
 {
 	for (int i = 0; i < partsOfWall.size(); i++)
