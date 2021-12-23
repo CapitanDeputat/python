@@ -6,7 +6,7 @@ private:
 	int nowX; 
 	int nowY; 
 	int beforeX;
-	int beforeY;
+	int beforeY; 
 public:
 	Line(int x, int y);
 	void changePos(int x, int y);
