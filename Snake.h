@@ -2,19 +2,19 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "Line.h"
-#define SNAKE_SIZE 30 
+#define SNAKE_SIZE 40
 
 class Snake
 {
 public:
 	enum MoveDirection { UP, DOWN, LEFT, RIGHT };
 	Snake();
-	Snake(int x, int y, int width, int height, sf::Color SnakeColor); //    
+	Snake(int x, int y, int width, int height, sf::Color SnakeColor);   
 	void drawSnake(sf::RenderWindow& window);
-	int getSnakeX();
+	int getSnakeX(); 
 	int getSnakeY(); 
 	bool moveSnake();
-	MoveDirection getSnakeDirection()
+	MoveDirection getSnakeDirection();
 	void setSnakeDirection(MoveDirection dir);
 	void addSegment(int x, int y);
 	bool collideWithSnake(int x, int y);
