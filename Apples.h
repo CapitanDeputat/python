@@ -10,7 +10,7 @@ private:
 	int appleSize; 
 	int windowWidth;
 	int windowHeight;
-	sf::CircleShape appleShape;
+	sf::ConvexShape appleShape;
 
 public:
 	Apple(int width, int height, int size);
