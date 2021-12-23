@@ -10,6 +10,9 @@
 #include "Wall.h"
 #include "Bot.h"
 
+#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 800
+
 
 
 class Game
@@ -23,13 +26,15 @@ private:
 	sf::Text menuStrings[17];
 	sf::Text playersPoints;
 	sf::Text botsPoints;
+	sf::Text gameTime;
 	sf::Text gameFinish[4];
+	sf::Text pause;
 	sf::Color SnakeColor = sf::Color::Red;
 	std::string enteredChars;
 
 
 	bool isGamePaused;
-	std::vector <Snake> botsArr;
+	std::vector <Snake> botsArr; 
 	sf::RectangleShape wallsCheckbox;
 	sf::RectangleShape borderCheckbox;
 	sf::RectangleShape gameBorder;
@@ -41,7 +46,7 @@ private:
 	int roundsCounter = 1;
 	int roundsOfBotsWins = 0;
 	int roundsOfPlayerWins = 0;
-	int nowRounds = 0;
+	int nowRounds = 0; 
 	int inGameBotsCounter;
 	int iter = 0;
 	std::string Colors[3] = { "Green" , "Magenta", "White" };
@@ -50,11 +55,14 @@ private:
 	std::string timeText;
 	std::string nickName;
 	void updateGame();
+	void drawMenu();
 	void drawGame();
 	void gameOver();
+	void drawSingleMenu();
+	void drawMultiMenu();
 public:
-	enum botsMode { EASY, NORMAL, INSANE, DEAD, PLAYER, REDDEAD, GREENDEAD, DRAW };
-	botsMode botMode;
+	enum botsMode { EASY, NORMAL, INSANE, DEAD, PLAYER, REDDEAD, GREENDEAD, DRAW }; //BotsLevel
+	botsMode botMode; 
 	Game();
 	void startGame();
 };
