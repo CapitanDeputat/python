@@ -19,6 +19,7 @@ void Line::changePos(int x, int y)
 }
 
 
+
 //Функции возвращающие значения координат
 int Line::getNowX()
 {
