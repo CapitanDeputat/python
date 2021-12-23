@@ -9,8 +9,14 @@ Apple::Apple(int width, int height, int size)
 	appleÑoordX = rand() % (windowWidth / size - 2) + 1;
 	appleÑoordY = rand() % (windowHeight / size - 2) + 1;
 
-	appleShape.setRadius(appleSize / 2);
-	appleShape.setFillColor(sf::Color::Red);
+	appleShape.setPointCount(8);
+
+	// Óñòàíàâëèâàåì êîîğäèíàòû âåğøèí
+	appleShape.setPoint(0, sf::Vector2f(0 , appleSize));
+	appleShape.setPoint(1, sf::Vector2f(appleSize ,0 ));
+	appleShape.setPoint(2, sf::Vector2f(appleSize, appleSize));
+
+	appleShape.setFillColor(sf::Color::Magenta);
 	appleShape.setPosition(appleÑoordX * appleSize, appleÑoordY * appleSize);
 }
 
